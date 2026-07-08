@@ -18,8 +18,9 @@ strongest version of the claim, not a strawman. Precision demands beat vague ter
 
 ## The forcing questions — one at a time, wait for each answer
 
-Route by stage; smart-skip anything already answered:
-- Pre-product → Q1, Q2, Q3
+Route by stage; smart-skip anything already answered. Q4 is never skippable — the
+DEFINE gate approves the wedge, and Q4 is the question that produces it:
+- Pre-product → Q1, Q2, Q3, Q4
 - Has users → Q2, Q4, Q5
 - Has paying customers → Q4, Q5, Q6
 - Pure engineering/infra → Q2, Q4

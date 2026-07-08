@@ -17,11 +17,15 @@ State the mode in your first reply. The user can override with one word.
 
 - **full** — new product, new app, or high-risk feature (data model changes, auth,
   payments, anything user-facing at launch). All stages.
-- **fast** — ordinary feature on an existing app. Skip DEFINE; run SPEC-lite (grill only
-  what's genuinely ambiguous — if nothing is, say so and move on), then BUILD → REVIEW →
-  QA (changed flows only) → SHIP.
+- **fast** — ordinary feature on an existing app. Skip DEFINE; run SPEC-lite: grill only
+  what's genuinely ambiguous — if nothing is, say so and move on — and land **one issue
+  in the tracker with the seams named** (a single slice is fine; BUILD's loop needs
+  issues and seams to exist). Then BUILD → REVIEW → QA (changed flows plus
+  qa-fix-loop.md's core-flow smoke) → SHIP.
 - **bug** — something is broken. Run the `diagnosing-bugs` skill (repro-first, regression
-  test before fix), then REVIEW (fix diff only) → SHIP.
+  test before fix). When the fix lands, dispatch the cross-model second opinion on the
+  fix diff in the background, if you run one — bug mode skips BUILD, so this is its
+  dispatch point — then REVIEW (fix diff only) → SHIP.
 
 If the project has never been set up, offer `/setup-matt-pocock-skills` once (issue
 tracker, triage labels, domain docs) before SPEC. LOCAL-ONLY projects (check the
@@ -33,9 +37,9 @@ touch a remote.
 ### 1. DEFINE — is this the right product?
 Read [define.md](define.md) and run the interrogation posture it describes: forcing
 questions, one at a time, no sycophancy. Smart-skip questions already answered.
-**Artifact:** a short product brief (problem, named user, wedge, non-goals) appended to
-the project's `_brain.md`. **Gate:** the user approves the wedge — the smallest version
-someone would actually use.
+**Artifact:** a short product brief (problem, named user, wedge, non-goals, open bets)
+appended to the project's `_brain.md`. **Gate:** the user approves the wedge — the
+smallest version someone would actually use.
 
 ### 2. SPEC — what exactly are we building?
 Run the `grilling` skill together with `domain-modeling`: interview one question at a
@@ -100,9 +104,10 @@ as feedback memories or skill edits. Skip freely when nothing stands out.
 
 - **Gates are stops.** Present the artifact and a recommendation, then wait. Never roll
   a gate into "I went ahead and...".
-- **Name skills explicitly.** This pipeline uses `grilling`, `domain-modeling`, `to-prd`,
-  `to-issues`, `tdd`, `eng-review`, `diagnosing-bugs`, `prototype` — not plugin skills
-  with similar names.
+- **Name skills explicitly.** This pipeline uses `grilling`, `domain-modeling`,
+  `codebase-design`, `to-prd`, `to-issues`, `tdd`, `eng-review`, `diagnosing-bugs`,
+  `prototype` — not plugin skills with similar names. If you install a release-gate or
+  visual-QA skill for SHIP/QA, add its exact name here too.
 - **Uncertain design question mid-pipeline?** Use the `prototype` skill (throwaway,
   one command to run, delete when answered) instead of arguing in the abstract.
 - **LOCAL-ONLY is absolute.** No push, no remote, no external service for projects

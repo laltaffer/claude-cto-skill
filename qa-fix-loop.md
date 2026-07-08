@@ -25,11 +25,13 @@ For each flow: walk it as a user would — click, type, submit, navigate back. W
 For every bug found, in order — never batch:
 
 1. **Locate** the source (grep the error, trace the component).
-2. **Fix** minimally.
-3. **Commit** atomically with a message naming the symptom.
-4. **Re-test** the exact flow that failed, same viewport.
-5. **Regression test.** Write the test that would have caught it, at the right seam
-   (see the `tdd` skill on seams). If no good seam exists, that's a finding — note it.
+2. **Regression test first.** Write the test that should fail because of this bug, at
+   the right seam (see the `tdd` skill on seams), and watch it fail. If no good seam
+   exists, that's a finding — note it and continue without the test.
+3. **Fix** minimally.
+4. **Re-test:** the new test goes green and the exact flow that failed passes, same
+   viewport.
+5. **Commit** fix + test atomically with a message naming the symptom.
 
 ## Self-regulation
 
