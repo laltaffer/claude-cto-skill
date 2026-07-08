@@ -85,10 +85,11 @@ run never silently becomes an approval.
 ### 6. QA — use it like a user
 Web: run the loop in [qa-fix-loop.md](qa-fix-loop.md) with Playwright/browser tools —
 **mobile breakpoints first (390px), then desktop** — plus a visual-QA pass for anything
-user-facing. Every bug found gets the fix loop: locate → fix → commit → re-test →
-regression test. Native apps: test suite + simulator smoke of the changed flows.
-**Artifact:** QA report + regression tests. **Gate:** all core flows pass; zero console
-errors on the happy path.
+user-facing. Every bug found gets the fix loop: locate → regression test (red) →
+fix → re-test → commit. Native apps: test suite + simulator smoke of the changed
+flows. **Artifact:** QA report + regression tests. **Gate:** qa-fix-loop.md's Done
+criteria met — all inventoried flows pass at 390px and desktop; zero console errors on
+the happy path.
 
 ### 7. SHIP — deployed and verified
 Run the release-gate skill for your setup (deploy + verify). It should refuse to run
