@@ -20,7 +20,7 @@ New Claude Code sessions will pick it up as `/cto`.
 ## What it expects
 
 - **Sub-skills from [mattpocock/skills](https://github.com/mattpocock/skills)** — the
-  pipeline names `grilling`, `domain-modeling`, `to-prd`, `to-issues`, `tdd`,
+  pipeline names `grilling`, `domain-modeling`, `to-spec`, `to-tickets`, `tdd`,
   `eng-review` (their `code-review`, renamed to avoid a plugin collision),
   `diagnosing-bugs`, `prototype`, and `codebase-design` explicitly. Install the ones
   you want; the pipeline degrades gracefully if you sketch those stages inline instead.

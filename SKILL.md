@@ -44,8 +44,9 @@ smallest version someone would actually use.
 ### 2. SPEC — what exactly are we building?
 Run the `grilling` skill together with `domain-modeling`: interview one question at a
 time, sharpen terms into `CONTEXT.md`, record hard-to-reverse decisions as ADRs. Then
-`to-prd` (synthesis, no re-interview), then `to-issues` (tracer-bullet vertical slices).
-**Artifact:** PRD + numbered issues in the project's tracker; CONTEXT.md/ADRs updated.
+`to-spec` (synthesis, no re-interview), then `to-tickets` (tracer-bullet vertical slices
+with blocking edges; wide mechanical refactors get sequenced expand–contract instead).
+**Artifact:** spec + numbered tickets in the project's tracker; CONTEXT.md/ADRs updated.
 **Gate:** the user approves the slice breakdown and the test seams.
 
 ### 3. ARCHITECT — how will it be built?
@@ -106,7 +107,7 @@ as feedback memories or skill edits. Skip freely when nothing stands out.
 - **Gates are stops.** Present the artifact and a recommendation, then wait. Never roll
   a gate into "I went ahead and...".
 - **Name skills explicitly.** This pipeline uses `grilling`, `domain-modeling`,
-  `codebase-design`, `to-prd`, `to-issues`, `tdd`, `eng-review`, `diagnosing-bugs`,
+  `codebase-design`, `to-spec`, `to-tickets`, `tdd`, `eng-review`, `diagnosing-bugs`,
   `prototype` — not plugin skills with similar names. If you install a release-gate or
   visual-QA skill for SHIP/QA, add its exact name here too.
 - **Uncertain design question mid-pipeline?** Use the `prototype` skill (throwaway,
