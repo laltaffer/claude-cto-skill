@@ -23,14 +23,13 @@ State the mode in your first reply. The user can override with one word.
   issues and seams to exist). Then BUILD → REVIEW → QA (changed flows plus
   qa-fix-loop.md's core-flow smoke) → SHIP.
 - **bug** — something is broken. Run the `diagnosing-bugs` skill (repro-first, regression
-  test before fix). When the fix lands, dispatch the cross-model second opinion on the
-  fix diff in the background, if you run one — bug mode skips BUILD, so this is its
-  dispatch point — then REVIEW (fix diff only) → SHIP.
+  test before fix). When the fix lands, dispatch the cross-model second opinion (if you run one) on the fix
+  diff in the background — bug mode skips BUILD, so this is its dispatch point — then
+  REVIEW (fix diff only) → SHIP.
 
 If the project has never been set up, offer `/setup-matt-pocock-skills` once (issue
-tracker, triage labels, domain docs) before SPEC. LOCAL-ONLY projects (check the
-project's `_brain.md` memory file) always use the local `docs/issues/` tracker and never
-touch a remote.
+tracker, triage labels, domain docs) before SPEC. LOCAL-ONLY projects (check the project's `_brain.md` memory file)
+always use the local `docs/issues/` tracker and never touch a remote.
 
 ## The stages (full mode)
 
@@ -42,17 +41,25 @@ appended to the project's `_brain.md`. **Gate:** the user approves the wedge —
 smallest version someone would actually use.
 
 ### 2. SPEC — what exactly are we building?
-Run the `grilling` skill together with `domain-modeling`: interview one question at a
-time, sharpen terms into `CONTEXT.md`, record hard-to-reverse decisions as ADRs. Then
-`to-spec` (synthesis, no re-interview), then `to-tickets` (tracer-bullet vertical slices
-with blocking edges; wide mechanical refactors get sequenced expand–contract instead).
+Run the `grilling` skill together with `domain-modeling`:
+interview one question at a time, sharpen terms into `CONTEXT.md`, record
+hard-to-reverse decisions as ADRs. Then `to-spec` (synthesis, no re-interview), then
+`to-tickets` (tracer-bullet vertical slices with blocking edges; wide mechanical
+refactors get sequenced expand–contract instead).
+
+For any multi-step journey, run `refero_search_flows` on the journey before `to-tickets`
+and `refero_search_screens` for the states of a single screen. Flows return each step's
+goal / action / system_response, which enumerates the states, gates, and recovery paths
+you would otherwise invent — feed them into the spec's state list, not into the visual
+design (that belongs to a design skill). Keep queries generic on
+LOCAL-ONLY projects.
 **Artifact:** spec + numbered tickets in the project's tracker; CONTEXT.md/ADRs updated.
 **Gate:** the user approves the slice breakdown and the test seams.
 
 ### 3. ARCHITECT — how will it be built?
-For substantial features, dispatch a code-architect or planning agent for an
-implementation blueprint; for smaller work, sketch it inline. Use the `codebase-design`
-vocabulary (deep modules, seams, adapters). Judge the blueprint against
+For substantial features, dispatch a code-architect or planning agent
+for an implementation blueprint; for smaller work, sketch it inline. Use the
+`codebase-design` vocabulary (deep modules, seams, adapters). Judge the blueprint against
 [review-posture.md](review-posture.md) — boring by default, blast radius, reversibility.
 **Artifact:** blueprint (files to touch, seams, test matrix, failure modes).
 **Gate:** seams and test matrix agreed; any innovation-token spend called out.
@@ -64,10 +71,9 @@ test files continuously; full suite at the end of each issue. Commit per slice.
 **Artifact:** code + tests, issue marked done. **Gate:** full suite green, typecheck clean.
 
 > When the last slice is committed, dispatch a second-opinion cross-model review
-> (e.g. `/codex:rescue`, if installed) on the branch diff **in the background** and
-> keep going. Cross-model review is slow (often minutes) — starting it here means its
-> verdict is usually ready by the time REVIEW's own findings are fixed, instead of
-> stalling the gate.
+> (e.g. `/codex:rescue`, if installed) on the branch diff **in the background** and keep going.
+> Cross-model review is slow (often minutes) — starting it here means its verdict is usually
+> ready by the time REVIEW's own findings are fixed, instead of stalling the gate.
 
 ### 5. REVIEW — find what CI can't
 Run the `eng-review` skill (Standards + Spec, parallel sub-agents) against the branch
@@ -75,26 +81,26 @@ point and review with the posture in [review-posture.md](review-posture.md). For
 line branches, suggest a deeper multi-agent review as well.
 
 The cross-model opinion (dispatched at the end of BUILD) is **mandatory but
-non-blocking** when available: fold its findings in when it lands. If REVIEW's own
-findings are fixed and it still hasn't returned, do not stall — proceed, and require
-its verdict to land before the SHIP gate (where its ship/no-ship call actually
-matters). If it never returns, say so at SHIP and let the user decide; a hung review
-run never silently becomes an approval.
+non-blocking** when available: fold its findings in when it lands. If REVIEW's own findings are fixed
+and it still hasn't returned, do not stall — proceed, and require its verdict to
+land before the SHIP gate (where its ship/no-ship call actually matters). If it never
+returns, say so at SHIP and let the user decide; a hung review run never silently becomes
+an approval.
 **Artifact:** findings list, each fixed or explicitly deferred with a reason.
 **Gate:** zero unaddressed confirmed findings from `eng-review`.
 
 ### 6. QA — use it like a user
 Web: run the loop in [qa-fix-loop.md](qa-fix-loop.md) with Playwright/browser tools —
 **mobile breakpoints first (390px), then desktop** — plus a visual-QA pass for anything
-user-facing. Every bug found gets the fix loop: locate → regression test (red) →
-fix → re-test → commit. Native apps: test suite + simulator smoke of the changed
+user-facing. Every bug found gets the fix loop: locate → regression test
+(red) → fix → re-test → commit. Native apps: test suite + simulator smoke of the changed
 flows. **Artifact:** QA report + regression tests. **Gate:** qa-fix-loop.md's Done
 criteria met — all inventoried flows pass at 390px and desktop; zero console errors on
 the happy path.
 
 ### 7. SHIP — deployed and verified
-Run the release-gate skill for your setup (deploy + verify). It should refuse to run
-without the project's Deploy Config — create it together if missing.
+Run the release-gate skill for your setup (deploy + verify). It should refuse to run without the project's Deploy Config —
+create it together if missing.
 **Artifact:** live URL (or verified build), `log.md` entry.
 **Gate:** production verified; no stray files in repo root or home.
 
@@ -108,8 +114,7 @@ as feedback memories or skill edits. Skip freely when nothing stands out.
   a gate into "I went ahead and...".
 - **Name skills explicitly.** This pipeline uses `grilling`, `domain-modeling`,
   `codebase-design`, `to-spec`, `to-tickets`, `tdd`, `eng-review`, `diagnosing-bugs`,
-  `prototype` — not plugin skills with similar names. If you install a release-gate or
-  visual-QA skill for SHIP/QA, add its exact name here too.
+  `prototype` — not plugin skills with similar names. If you install a release-gate or visual-QA skill for SHIP/QA, add its exact name here too.
 - **Uncertain design question mid-pipeline?** Use the `prototype` skill (throwaway,
   one command to run, delete when answered) instead of arguing in the abstract.
 - **LOCAL-ONLY is absolute.** No push, no remote, no external service for projects
