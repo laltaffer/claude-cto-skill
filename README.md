@@ -32,6 +32,19 @@ New Claude Code sessions will pick it up as `/cto`.
   the states of a multi-step journey from real products instead of inventing them.
   The stage works without it; you just do that enumeration by hand.
 
+## Companion skills
+
+Same shape, same gate discipline, built to hand work to each other:
+
+- **[/pm-lead](https://github.com/laltaffer/pm-lead)** — the product pipeline upstream of
+  this one. It decides what to build and why, then hands a validated product definition
+  down to DEFINE here. It never writes code.
+- **[/cmo](https://github.com/laltaffer/claude-cmo-skill)** — the marketing pipeline that
+  SHIP hands web copy to.
+- **[/uxr](https://github.com/laltaffer/claude-uxr-skill)** — the research pipeline. It
+  owns evidence for product decisions; hand it the question when a gate here stalls on
+  "we don't actually know what users do."
+
 ## Customize
 
 - `review-posture.md` — the "Engineering preferences" section is this shop's; edit to
