@@ -91,8 +91,7 @@ an approval.
 
 ### 6. QA — use it like a user
 Web: run the loop in [qa-fix-loop.md](qa-fix-loop.md) with Playwright/browser tools —
-**mobile breakpoints first (390px), then desktop** — plus a visual-QA pass for anything
-user-facing. Every bug found gets the fix loop: locate → regression test
+**mobile breakpoints first (390px), then desktop**. Every bug found gets the fix loop: locate → regression test
 (red) → fix → re-test → commit. Native apps: test suite + simulator smoke of the changed
 flows. **Artifact:** QA report + regression tests. **Gate:** qa-fix-loop.md's Done
 criteria met — all inventoried flows pass at 390px and desktop; zero console errors on
@@ -114,7 +113,7 @@ as feedback memories or skill edits. Skip freely when nothing stands out.
   a gate into "I went ahead and...".
 - **Name skills explicitly.** This pipeline uses `grilling`, `domain-modeling`,
   `codebase-design`, `to-spec`, `to-tickets`, `tdd`, `eng-review`, `diagnosing-bugs`,
-  `prototype` — not plugin skills with similar names. If you install a release-gate or visual-QA skill for SHIP/QA, add its exact name here too.
+  `prototype` — not plugin skills with similar names. If you install a release-gate skill for SHIP, add its exact name here too.
 - **Uncertain design question mid-pipeline?** Use the `prototype` skill (throwaway,
   one command to run, delete when answered) instead of arguing in the abstract.
 - **LOCAL-ONLY is absolute.** No push, no remote, no external service for projects
