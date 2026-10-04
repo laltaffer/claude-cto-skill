@@ -51,7 +51,7 @@ Same shape, same gate discipline, built to hand work to each other:
   yours.
 - `define.md` — YC-style forcing questions for stage 1; adjust the escape hatch to
   your tolerance for interrogation.
-- `qa-fix-loop.md` — assumes web QA via Playwright/browser tools at 390px first.
+- `qa-fix-loop.md` — assumes web QA via browser tools (chrome-devtools-mcp, claude-in-chrome, or similar) at 390px first.
 
 ## License
 

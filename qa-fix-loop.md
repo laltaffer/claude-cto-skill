@@ -7,8 +7,8 @@ Use it like a user, fix what breaks, and lock every fix down with a regression t
 
 1. Inventory the flows this change touches (from the PRD/issues) plus the app's 2–3
    core flows regardless.
-2. Test target: local dev server or preview deploy. Browser via Playwright /
-   chrome-devtools tools.
+2. Test target: local dev server or preview deploy. Browser via the
+   chrome-devtools-mcp and claude-in-chrome tools.
 3. **Mobile first.** Set viewport to 390×844 before anything else. Desktop pass second.
    Screenshots go to the project's `.scratch/` with stable names (`qa-<flow>-mobile.png`).
 
